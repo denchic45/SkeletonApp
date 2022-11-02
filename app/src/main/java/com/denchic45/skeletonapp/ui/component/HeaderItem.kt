@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HeaderItem(name: String) {
+fun HeaderListItem(name: String) {
     Row(
         Modifier.height(56.dp).padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
