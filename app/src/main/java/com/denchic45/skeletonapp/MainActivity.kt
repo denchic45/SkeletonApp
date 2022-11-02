@@ -11,9 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.denchic45.skeletonapp.di.AppComponent
-import com.denchic45.skeletonapp.di.NetworkComponent
-import com.denchic45.skeletonapp.di.create
+import com.denchic45.skeletonapp.di.*
 import com.denchic45.skeletonapp.ui.theme.SkeletonAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,12 +23,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
-                    val appComponent = AppComponent::class.create(NetworkComponent::class.create(),
-                        LocalContext.current)
-
-
-                    appComponent.testService.start()
+                    val dataComponent = DataComponent::class.create()
+                    val appComponent = AppComponent::class.create(
+                        CommonComponent::class.create(LocalContext.current),
+                        NetworkComponent::class.create(dataComponent),
+                        dataComponent
+                    )
                 }
             }
         }
