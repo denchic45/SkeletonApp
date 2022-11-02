@@ -1,4 +1,4 @@
 package com.denchic45.skeletonapp.data.model
 
 @kotlinx.serialization.Serializable
-data class Login(private val login: String, private val password: String)
+data class LoginRequest(private val login: String, private val password: String)
