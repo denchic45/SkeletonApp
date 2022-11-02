@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
     kotlin("plugin.serialization") version "1.7.20"
 }
 
@@ -117,5 +118,5 @@ dependencies {
     // support new language API
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
 }
