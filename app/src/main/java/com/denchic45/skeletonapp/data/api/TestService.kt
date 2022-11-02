@@ -1,8 +1,8 @@
-package com.denchic45.skeletonapp.dataa.api
+package com.denchic45.skeletonapp.data.api
 
-import com.denchic45.skeletonapp.dataa.model.Login
-import com.denchic45.skeletonapp.dataa.model.LoginResponse
-import com.denchic45.skeletonapp.dataa.preference.AppDataStore
+import com.denchic45.skeletonapp.data.model.Login
+import com.denchic45.skeletonapp.data.model.LoginResponse
+import com.denchic45.skeletonapp.data.preference.AppDataStore
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*

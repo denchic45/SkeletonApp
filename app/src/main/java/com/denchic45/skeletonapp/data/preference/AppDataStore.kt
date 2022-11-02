@@ -1,4 +1,4 @@
-package com.denchic45.skeletonapp.dataa.preference
+package com.denchic45.skeletonapp.data.preference
 
 import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey

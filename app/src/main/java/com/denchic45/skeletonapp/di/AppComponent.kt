@@ -7,8 +7,8 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import com.denchic45.skeletonapp.dataa.api.TestService
-import com.denchic45.skeletonapp.dataa.preference.AppDataStore
+import com.denchic45.skeletonapp.data.api.TestService
+import com.denchic45.skeletonapp.data.preference.AppDataStore
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.plugins.*
