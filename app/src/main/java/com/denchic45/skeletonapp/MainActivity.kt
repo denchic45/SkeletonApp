@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.denchic45.skeletonapp.di.*
+import com.denchic45.skeletonapp.ui.screen.main.MainContent
 import com.denchic45.skeletonapp.ui.theme.SkeletonAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,27 +24,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val dataComponent = DataComponent::class.create()
-                    val appComponent = AppComponent::class.create(
-                        CommonComponent::class.create(LocalContext.current),
-                        NetworkComponent::class.create(dataComponent),
-                        dataComponent
+                    val dataDI = DataDI::class.create()
+                    val appDI = AppDI::class.create(
+                        CommonDI::class.create(LocalContext.current),
+                        NetworkDI::class.create(dataDI),
+                        dataDI
                     )
+                    MainContent(appDI.mainComponent)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SkeletonAppTheme {
-        Greeting("Android")
     }
 }

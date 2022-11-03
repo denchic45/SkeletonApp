@@ -10,5 +10,5 @@ sealed class RootConfig : Parcelable {
 }
 
 sealed class RootChild {
-    class Greeting(private val component: GreetingComponent) : RootChild()
+    class Greeting(val component: GreetingComponent) : RootChild()
 }

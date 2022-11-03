@@ -15,7 +15,7 @@ class MainComponent(
     navigation: StackNavigation<RootConfig>, componentContext: ComponentContext
 ) : ComponentContext by componentContext {
 
-    private val childStack = childStack(
+    val childStack = childStack(
         source = navigation,
         initialConfiguration = RootConfig.Greeting,
         childFactory = { config, _ ->

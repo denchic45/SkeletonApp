@@ -1,6 +1,5 @@
 package com.denchic45.skeletonapp.data.api
 
-import com.denchic45.skeletonapp.data.preference.AppDataStore
 import com.denchic45.skeletonapp.di.AuthHttpClient
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
