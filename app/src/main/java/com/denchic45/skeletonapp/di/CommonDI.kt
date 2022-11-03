@@ -3,8 +3,7 @@ package com.denchic45.skeletonapp.di
 import android.content.Context
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.DefaultComponentContext
-import com.arkivanov.decompose.router.overlay.OverlayNavigation
-import com.arkivanov.decompose.router.overlay.OverlayNavigator
+import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.denchic45.skeletonapp.ui.navigation.RootConfig
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +13,7 @@ import me.tatarka.inject.annotations.Provides
 
 @AppScope
 @Component
-abstract class CommonComponent(
+abstract class CommonDI(
     @get:Provides val context: Context,
 ) {
 
@@ -30,8 +29,8 @@ abstract class CommonComponent(
 
     @AppScope
     @Provides
-    fun provideNavigation(): OverlayNavigation<RootConfig> {
-        return OverlayNavigation()
+    fun provideNavigation(): StackNavigation<RootConfig> {
+        return StackNavigation()
     }
 }
 

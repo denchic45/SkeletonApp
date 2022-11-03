@@ -10,7 +10,7 @@ import me.tatarka.inject.annotations.Provides
 
 @DataScope
 @Component
-abstract class DataComponent() {
+abstract class DataDI {
 
     fun providePreferenceStore(context: Context): PreferenceStore = context.appPreferenceStore
 
