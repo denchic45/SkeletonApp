@@ -21,7 +21,7 @@ class MainComponent(
 
     val childStack = childStack(
         source = navigation,
-        initialConfiguration = RootConfig.Upload,
+        initialConfiguration = RootConfig.Greeting,
         childFactory = { config, _ ->
             when (config) {
                 RootConfig.Greeting -> RootChild.Greeting(greetingComponent())

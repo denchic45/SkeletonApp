@@ -5,10 +5,12 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -19,6 +21,9 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.denchic45.skeletonapp.domain.MediaItem
+import com.denchic45.skeletonapp.util.FilesAndroid
+import com.denchic45.skeletonapp.util.toBitmap
 import com.denchic45.skeletonapp.util.toByteArray
 
 
@@ -31,33 +36,40 @@ fun UploadMediaTestScreen(component: UploadMediaTestComponent) {
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        if (Build.VERSION.SDK_INT < 28) {
-            bitmap.value = MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
-        } else {
-            val source = ImageDecoder.createSource(context.contentResolver, uri!!)
-            component.onImagePicked(ImageDecoder.decodeBitmap(source).toByteArray())
+        uri?.let {
+            if (Build.VERSION.SDK_INT < 28) {
+                bitmap.value = MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
+            } else {
+                Log.d("lol", "PATH: ${FilesAndroid.getFilePath(context, uri)}")
+                val source = ImageDecoder.createSource(context.contentResolver, uri)
+                component.onImagePicked(MediaItem(ImageDecoder.decodeBitmap(source).toByteArray(), context.contentResolver.getType(uri)!!))
+            }
         }
     }
 
-    Row {
+    Column {
         val media by component.media.collectAsState()
         when (val media = media) {
-            MediaState.Nothing -> {}
-            is MediaState.Bytes -> {
-                bitmap.value?.let { btm ->
-                    Image(
-                        bitmap = btm.asImageBitmap(),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(400.dp)
-                            .padding(20.dp)
-                    )
-                }
+            MediaState.Nothing -> {
+                Toast.makeText(context, "nothing", Toast.LENGTH_SHORT).show()
             }
-            is MediaState.Url -> AsyncImage(
-                model = media.url,
-                contentDescription = null
-            )
+            is MediaState.Bytes -> {
+                Toast.makeText(context, "bytes", Toast.LENGTH_SHORT).show()
+                Image(
+                    bitmap = media.mediaItem.byteArray.toBitmap().asImageBitmap(),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(400.dp)
+                        .padding(20.dp)
+                )
+            }
+            is MediaState.Url -> {
+                Toast.makeText(context, "url", Toast.LENGTH_SHORT).show()
+                AsyncImage(
+                    model = media.url,
+                    contentDescription = null
+                )
+            }
         }
 
         val uploadAvailable by component.uploadAvailable.collectAsState(false)
