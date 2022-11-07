@@ -24,9 +24,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val dataDI = DataDI::class.create()
+                    val commonDI = CommonDI::class.create(LocalContext.current)
+                    val dataDI = DataDI::class.create(commonDI)
                     val appDI = AppDI::class.create(
-                        CommonDI::class.create(LocalContext.current),
+                        commonDI,
                         NetworkDI::class.create(dataDI),
                         dataDI
                     )

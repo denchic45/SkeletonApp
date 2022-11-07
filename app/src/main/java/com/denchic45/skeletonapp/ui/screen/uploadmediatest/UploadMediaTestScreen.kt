@@ -23,7 +23,7 @@ import com.denchic45.skeletonapp.util.toByteArray
 
 
 @Composable
-fun UploadMediaTestScreen(component: TestMediaComponent) {
+fun UploadMediaTestScreen(component: UploadMediaTestComponent) {
 
     val context = LocalContext.current
     val bitmap = remember { mutableStateOf<Bitmap?>(null) }

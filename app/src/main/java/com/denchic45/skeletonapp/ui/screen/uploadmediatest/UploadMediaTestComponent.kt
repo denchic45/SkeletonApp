@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-class TestMediaComponent(
+class UploadMediaTestComponent(
     private val testService: TestService,
     componentContext: ComponentContext
 ) : ComponentContext by componentContext {
