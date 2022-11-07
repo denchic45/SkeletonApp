@@ -10,14 +10,16 @@ import me.tatarka.inject.annotations.Provides
 
 @DataScope
 @Component
-abstract class DataDI {
+abstract class DataDI(@Component val commonDI: CommonDI) {
 
+    @DataScope
+    @Provides
     fun providePreferenceStore(context: Context): PreferenceStore = context.appPreferenceStore
 
     @DataScope
     @Provides
-    fun provideAppDataStore(): AppDataStore {
-        return AppDataStore(providePreferenceStore(TODO()))
+    fun provideAppDataStore(store: PreferenceStore): AppDataStore {
+        return AppDataStore(store)
     }
 
     private val Context.appPreferenceStore: PreferenceStore by preferencesDataStore(name = "app")
