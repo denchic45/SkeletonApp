@@ -105,6 +105,9 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
+    implementation("io.coil-kt:coil:2.2.2")
+    implementation("io.coil-kt:coil-compose:2.2.2")
+
     // Ktor
     val ktorVersion = "2.0.3"
     implementation("io.ktor:ktor-client-core:$ktorVersion")
