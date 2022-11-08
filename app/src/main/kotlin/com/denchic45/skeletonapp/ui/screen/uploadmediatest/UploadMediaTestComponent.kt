@@ -8,7 +8,6 @@ import com.denchic45.skeletonapp.util.componentScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 
 @Inject
@@ -24,10 +23,10 @@ class UploadMediaTestComponent(
     val uploadAvailable = media.map { it is MediaState.Bytes }
 
     fun onUploadClick() {
-        coroutineScope.launch {
+//        coroutineScope.launch {
 //            authService.login("admin","admin")
-            testService.testUploadMedia((media.value as MediaState.Bytes).mediaItem, "Сертификат")
-        }
+//            testService.testUploadMedia((media.value as MediaState.Bytes).mediaItem, "Сертификат")
+//        }
     }
 
     fun onImagePicked(bytes: MediaItem) {

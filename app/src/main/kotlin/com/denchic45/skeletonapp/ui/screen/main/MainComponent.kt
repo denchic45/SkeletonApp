@@ -3,6 +3,7 @@ package com.denchic45.skeletonapp.ui.screen.main
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.denchic45.skeletonapp.ui.navigation.RootChild
 import com.denchic45.skeletonapp.ui.navigation.RootConfig
 import com.denchic45.skeletonapp.ui.screen.getmediatest.GetMediaTestComponent
@@ -16,7 +17,8 @@ class MainComponent(
     greetingComponent: () -> GreetingComponent,
     uploadMediaTestComponent: () -> UploadMediaTestComponent,
     getMediaTestComponent: () -> GetMediaTestComponent,
-    navigation: StackNavigation<RootConfig>, componentContext: ComponentContext
+    private val navigation: StackNavigation<RootConfig>,
+    componentContext: ComponentContext
 ) : ComponentContext by componentContext {
 
     val childStack = childStack(
@@ -29,4 +31,16 @@ class MainComponent(
                 RootConfig.Get -> RootChild.Get(getMediaTestComponent())
             }
         })
+
+    fun onItem1Click() {
+        navigation.replaceCurrent(RootConfig.Greeting)
+    }
+
+    fun onItem2Click() {
+        navigation.replaceCurrent(RootConfig.Upload)
+    }
+
+    fun onItem3Click() {
+        navigation.replaceCurrent(RootConfig.Get)
+    }
 }

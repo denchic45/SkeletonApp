@@ -1,3 +1,5 @@
+@file:Suppress("SimplifiableCallChain")
+
 package com.denchic45.skeletonapp.util
 
 import kotlinx.serialization.encodeToString

@@ -1,7 +1,6 @@
 package com.denchic45.skeletonapp.data.api
 
 import com.denchic45.skeletonapp.data.model.PublicUrlResponse
-import com.denchic45.skeletonapp.data.model.TestImagesResponse
 import com.denchic45.skeletonapp.di.AuthHttpClient
 import com.denchic45.skeletonapp.domain.MediaItem
 import io.ktor.client.call.*

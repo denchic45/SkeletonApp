@@ -10,7 +10,6 @@ import me.tatarka.inject.annotations.Inject
 
 @Inject
 class GreetingComponent(componentContext: ComponentContext) : ComponentContext by componentContext {
-
     init {
         val json = Json { prettyPrint = true }
         val strA = json.encodeToString<Structure>(Structure.A("A message"))
@@ -29,14 +28,14 @@ sealed class Structure {
     abstract fun printSelf()
 
     @Serializable
-    class A(val a: String) : Structure() {
+    class A(private val a: String) : Structure() {
         override fun printSelf() {
             println("a: $a")
         }
     }
 
     @Serializable
-    class B(val x: Int, val y: Boolean) : Structure() {
+    class B(private val x: Int, private val y: Boolean) : Structure() {
         override fun printSelf() {
             println("x: $x y:$y")
         }
