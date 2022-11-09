@@ -1,5 +1,6 @@
 package com.denchic45.skeletonapp.ui.screen.getmediatest
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,7 +16,7 @@ import com.denchic45.skeletonapp.data.model.PublicUrlResponse
 fun GetMediaScreen(component: GetMediaTestComponent) {
     val items by component.images.collectAsState(initial = emptyList())
 
-    LazyColumn {
+    LazyColumn(Modifier.fillMaxWidth()) {
         items(items, PublicUrlResponse::publicUrl) {
             AsyncImage(model = it.publicUrl, contentDescription = "", Modifier.size(300.dp))
         }

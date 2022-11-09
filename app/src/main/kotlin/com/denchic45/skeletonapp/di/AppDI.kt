@@ -1,5 +1,6 @@
 package com.denchic45.skeletonapp.di
 
+import com.arkivanov.essenty.backhandler.BackHandler
 import com.denchic45.skeletonapp.data.api.TestService
 import com.denchic45.skeletonapp.ui.screen.main.MainComponent
 import me.tatarka.inject.annotations.Component
@@ -12,5 +13,5 @@ abstract class AppDI(
 ) {
     abstract val testService: TestService
 
-    abstract val mainComponent: MainComponent
+    abstract val mainComponent: (backHandler: BackHandler) -> MainComponent
 }

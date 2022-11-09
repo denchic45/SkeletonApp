@@ -1,6 +1,6 @@
 package com.denchic45.skeletonapp.ui.screen.main
 
-import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.GetApp
 import androidx.compose.material.icons.outlined.Message
@@ -8,42 +8,57 @@ import androidx.compose.material.icons.outlined.Upload
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.plus
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.scale
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.denchic45.skeletonapp.ui.navigation.RootChild
+import com.denchic45.skeletonapp.ui.screen.getmediatest.GetMediaScreen
 import com.denchic45.skeletonapp.ui.screen.greeting.GreetingScreen
+import com.denchic45.skeletonapp.ui.screen.uploadmediatest.UploadMediaTestScreen
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalDecomposeApi::class)
 @Composable
-fun MainContent(mainComponent: MainComponent) {
-    val childStack by mainComponent.childStack.subscribeAsState()
-    val child = childStack.active.instance
+fun MainContent(component: MainComponent) {
+
+    val childStack by component.childStack.subscribeAsState()
+    val activeComponent = childStack.active.instance
+
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = "Заголовк") }) },
+        topBar = { TopAppBar(title = { Text(text = "Заголовок") }) },
         bottomBar = {
             NavigationBar {
-                NavigationBarItem(selected = child is RootChild.Greeting,
-                    onClick = mainComponent::onItem1Click,
+                NavigationBarItem(
+                    selected = activeComponent is RootChild.Greeting,
+                    onClick = { component.onItem1Click() },
                     label = { Text("Item 1") },
                     icon = { Icon(Icons.Outlined.Message, "") })
-                NavigationBarItem(selected = child is RootChild.Upload,
+                NavigationBarItem(
+                    selected = activeComponent is RootChild.Upload,
                     label = { Text("Item 2") },
-                    onClick = mainComponent::onItem2Click,
+                    onClick = { component.onItem2Click() },
                     icon = { Icon(Icons.Outlined.Upload, "") })
-                NavigationBarItem(selected = child is RootChild.Get,
+                NavigationBarItem(
+                    selected = activeComponent is RootChild.Get,
                     label = { Text("Item 3") },
-                    onClick = mainComponent::onItem3Click,
+                    onClick = { component.onItem3Click() },
                     icon = { Icon(Icons.Outlined.GetApp, "") })
             }
         }
-    ) {
-        Children(stack = childStack) {
-            when (child) {
+    ) { paddingValues ->
+        Children(
+            stack = childStack,
+            Modifier.padding(paddingValues),
+            animation = stackAnimation(fade() + scale())
+        ) {
+            when (val child = it.instance) {
                 is RootChild.Greeting -> GreetingScreen(child.component)
-                is RootChild.Upload -> RootChild.Upload(child.component)
-                is RootChild.Get -> RootChild.Get(child.component)
+                is RootChild.Upload -> UploadMediaTestScreen(child.component)
+                is RootChild.Get -> GetMediaScreen(child.component)
             }
         }
     }

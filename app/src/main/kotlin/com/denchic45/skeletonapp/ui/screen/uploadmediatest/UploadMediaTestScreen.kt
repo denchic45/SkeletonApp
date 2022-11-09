@@ -11,6 +11,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -42,12 +43,17 @@ fun UploadMediaTestScreen(component: UploadMediaTestComponent) {
             } else {
                 Log.d("lol", "PATH: ${FilesAndroid.getFilePath(context, uri)}")
                 val source = ImageDecoder.createSource(context.contentResolver, uri)
-                component.onImagePicked(MediaItem(ImageDecoder.decodeBitmap(source).toByteArray(), context.contentResolver.getType(uri)!!))
+                component.onImagePicked(
+                    MediaItem(
+                        ImageDecoder.decodeBitmap(source).toByteArray(),
+                        context.contentResolver.getType(uri)!!
+                    )
+                )
             }
         }
     }
 
-    Column {
+    Column(Modifier.fillMaxWidth()) {
         val media by component.media.collectAsState()
         when (val media = media) {
             MediaState.Nothing -> {
