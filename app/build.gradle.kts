@@ -84,10 +84,14 @@ dependencies {
     // Icons
     implementation("org.jetbrains.compose.material:material-icons-extended:1.2.0")
 
+    // System UI Controller
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
+
     // Decompose
     val decomposeVersion = "1.0.0-alpha-06"
     implementation("com.arkivanov.decompose:decompose:$decomposeVersion")
     implementation("com.arkivanov.decompose:extensions-compose-jetpack:$decomposeVersion")
+    implementation("com.arkivanov.decompose:extensions-compose-jetbrains:$decomposeVersion")
 
     // kotlin-inject
     ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.5.1")
@@ -96,12 +100,12 @@ dependencies {
     // AndroidX
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
